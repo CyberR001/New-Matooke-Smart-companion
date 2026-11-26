@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: matookesmart-companion
+    runtime: python
+    plan: starter
+    rootDir: matookesmart-companion/backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DB_PATH
+        value: /var/data/matookesmart.db
+    disk:
+      name: matookesmart-data
+      mountPath: /var/data
+      sizeGB: 1
